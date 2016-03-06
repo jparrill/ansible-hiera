@@ -1,0 +1,20 @@
+---
+- name: Test
+  hosts: 127.0.0.1
+  tasks:
+    - name: Retrieving Hiera Data
+      hiera: path=/bin/hiera key="{{ item.value }}" fact="{{ item.key }}" source=/etc/hiera.yaml
+      args:
+        context:
+          environment: 'production'
+          fqdn: 'puppet01.localdomain'
+      with_dict:
+        var_array_multi: "proxy::array_multi"
+        var_array_line: "proxy::array_line"
+        line: "line"
+
+    - debug: msg="{{ item }}"
+      with_items: var_array_multi
+    - debug: msg="{{ item }}"
+      with_items: var_array_line
+    - debug: msg="{{ line }}"

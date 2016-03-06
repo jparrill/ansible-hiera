@@ -1,0 +1,10 @@
+---
+proxy::array_multi:
+  - 'Test'
+  - 'In'
+  - 'Production'
+  - 'Environment'
+proxy::array_line: [ 'PRO00', 'PRO01', 'PRO02', 'PRO03' ]
+line: 'PRO05'
+test4: '04'
+test5: '05'

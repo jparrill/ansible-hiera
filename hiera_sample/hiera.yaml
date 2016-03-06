@@ -1,0 +1,10 @@
+---
+:backends:
+  - yaml
+:hierarchy:
+  - "nodes/%{fqdn}"
+  - "%{environment}"
+  - global
+
+:yaml:
+  :datadir:

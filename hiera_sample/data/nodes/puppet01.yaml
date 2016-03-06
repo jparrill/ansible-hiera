@@ -1,0 +1,9 @@
+---
+proxy::array_multi:
+  - 'Test'
+  - 'Into'
+  - 'Hostname'
+proxy::array_line: [ 'PRO005', 'PRO015', 'PRO025', 'PRO035' ]
+line: 'PRO07'
+test4: '01111111'
+test5: '05222222'
