@@ -70,9 +70,9 @@ ok: [vagrantServer] => (item={'key': 'line', 'value': 'line'})
 ok: [vagrantServer] => (item={'key': 'var_array_multi', 'value': 'proxy::array_multi'})
 
 TASK: [debug msg="{{ item }}"] ************************************************
-ok: [vagrantServer] => (item=PENE2) => {
-    "item": "PENE2",
-    "msg": "PENE2"
+ok: [vagrantServer] => (item=HIERA2) => {
+    "item": "HIERA2",
+    "msg": "HIERA2"
 }
 ok: [vagrantServer] => (item=GIGANTE2) => {
     "item": "GIGANTE2",
