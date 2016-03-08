@@ -109,8 +109,36 @@ EXAMPLES = '''
 '''
 
 RETURN = '''
-This module will return the datatype that you got in Hieradata backend.
-
+path:
+    description: bin for hiera execution
+    returned: success
+    type: string
+    sample: "/path/to/file"
+environment:
+    description: scope to be interpreted by hiera
+    returned: success even the scope does not exists
+    type: string
+    sample: "production"
+fqdn:
+    description: other scope for hiera parse
+    returned: success even the scope does not exists
+    type: string
+    sample: ""
+key:
+    description: hiera's value name
+    returned: success
+    type: string
+    sample: "proxy::array_multi"
+fact:
+    description: variable where store the Hiera's value
+    returned: success
+    type: string
+    sample: "var_array_multi"
+source:
+    description: hiera config file
+    returned: success
+    type: string
+    sample: "/path/to/hiera.yaml"
 '''
 
 
@@ -132,7 +160,7 @@ def main():
     """
     module = AnsibleModule(
         argument_spec=dict(
-            name=dict(aliases=['key']),
+            name=dict(required=True, aliases=['key']),
             fact=dict(required=False),
             path=dict(required=False, default="hiera"),
             context=dict(required=False, default={}, type='dict'),
