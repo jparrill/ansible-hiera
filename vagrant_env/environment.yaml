@@ -5,14 +5,14 @@ puppet01.localdomain:
   address: 192.168.1.50
   box: RH7.2
 
-puppet02.localdomain:
-  memory: 1024
-  cpus: 1
-  address: 192.168.1.51
-  box: RH7.2
-
-puppet03.localdomain:
-  memory: 1024
-  cpus: 1
-  address: 192.168.1.52
-  box: RH7.2
+# puppet02.localdomain:
+#   memory: 1024
+#   cpus: 1
+#   address: 192.168.1.51
+#   box: RH7.2
+#
+# puppet03.localdomain:
+#   memory: 1024
+#   cpus: 1
+#   address: 192.168.1.52
+#   box: RH7.2
