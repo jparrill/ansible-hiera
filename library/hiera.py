@@ -11,10 +11,107 @@ more details into LICENSE file
 
 """
 
+DOCUMENTATION = '''
+---
+module: hiera
+version_added: "1.0.0"
+short_description: Use Hiera key/values into Ansible as fact.
+description:
+    - Once copied all Hiera Data from PuppetMaster and Hiera.yaml into
+    destination node, this module will parse all key-value that you need
+    and create node facts in execution time
+options:
+    path:
+        description:
+            - Hiera executable path in destination node. This bin will be
+            executed to follow all hierarchi and get data from hiera
+        required: false
+        default: hiera
+    fact:
+        description:
+            - This is a fact name where you want to save your variable
+            from Hiera.
+        required: false
+        default: null
+    key:
+        description:
+            - This is the Hiera variable name that you want to get.
+        required: true
+        default: null
+        aliases: ['name']
+    context:
+        description:
+            - This key value will set the scope of hiera key/value. Also will
+            follow the hiera's hierarchi, then if you dont have any variable
+            in the first scope will go down to the next one.
+        required: false
+        default: null
+    source:
+        description:
+            - The hiera config file path, if you want to custom every query
+            with multiple hierarchies
+        required: false
+        default: null
+'''
+
+EXAMPLES = '''
+# Without Puppetmaster example, stand-alone node
+---
+- name: Test
+  hosts: 127.0.0.1
+  tasks:
+    - name: Retrieving Hiera Data
+      hiera: path=/bin/hiera key="{{ item.value }}" fact="{{ item.key }}" source=/etc/hiera.yaml
+      args:
+        context:
+          environment: 'production'
+          fqdn: 'puppet01.localdomain'
+      with_dict:
+        var_array_multi: "proxy::array_multi"
+        var_array_line: "proxy::array_line"
+        line: "line"
+
+    - debug: msg="{{ item }}"
+      with_items: var_array_multi
+    - debug: msg="{{ item }}"
+      with_items: var_array_line
+    - debug: msg="{{ line }}"
+
+# Puppetmaster example
+---
+- name: Create Facts with Hiera Data
+  hosts: nodes
+  sudo: yes
+  tasks:
+    - name: Copy Hiera Data into Destination node
+      copy: src=/var/lib/hiera/ dest=/var/lib/
+
+    - name: Copy Hiera Config into Destination node
+      copy: src=/etc/hiera.yaml dest=/etc/hiera.yaml
+
+    - name: Retrieving Hiera Data
+      hiera: path=/bin/hiera key="{{ item.value }}" fact="{{ item.key }}" source=/etc/hiera.yaml
+      args:
+        context:
+          environment: 'production'
+          fqdn: 'puppet01.localdomain'
+      with_dict:
+        var_array_multi: "proxy::array_multi"
+        var_array_line: "proxy::array_line"
+        line: "line"
+
+    - debug: msg="{{ item }}"
+      with_items: var_array_multi
+    - debug: msg="{{ item }}"
+      with_items: var_array_line
+    - debug: msg="{{ line }}"
+'''
+
 
 def main():
-    """Main function.
-    This module will parse your hiera hierarchi and will return the reqired
+    """
+    Main function.
+    This module will parse your hiera hierarchi and will return the required
     values
     - key: Is the key name of the hiera variable
     - fact: Is the key name that must store the hiera output
