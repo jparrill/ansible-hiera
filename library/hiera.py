@@ -1,4 +1,4 @@
-#!/bin/env python
+#!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
 Hiera-Ansible Parser.
@@ -21,24 +21,20 @@ Hiera-Ansible Parser.
 DOCUMENTATION = '''
 ---
 module: hiera
-version_added: "1.0.0"
+version_added: "2.1"
 short_description: Use Hiera key/values into Ansible as fact.
-author: "Jua"
+author: "Juan Manuel Parrilla @kerbeross jparrill@redhat.com"
 description:
-    - Once copied all Hiera Data from PuppetMaster and Hiera.yaml into
-    destination node, this module will parse all key-value that you need
-    and create node facts in execution time
+    - Once copied all Hiera Data from PuppetMaster and Hiera.yaml into destination node, this module will parse all key-value that you need and create node facts in execution time
 options:
     path:
         description:
-            - Hiera executable path in destination node. This bin will be
-            executed to follow all hierarchi and get data from hiera
+            - Hiera executable path in destination node. This bin will be executed to follow all hierarchi and get data from hiera
         required: false
         default: hiera
     fact:
         description:
-            - This is a fact name where you want to save your variable
-            from Hiera.
+            - This is a fact name where you want to save your variable from Hiera.
         required: false
         default: null
     key:
@@ -49,15 +45,12 @@ options:
         aliases: ['name']
     context:
         description:
-            - This key value will set the scope of hiera key/value. Also will
-            follow the hiera's hierarchi, then if you dont have any variable
-            in the first scope will go down to the next one.
+            - This key value will set the scope of hiera key/value. Also will follow the hiera's hierarchi, then if you dont have any variable in the first scope will go down to the next one.
         required: false
         default: null
     source:
         description:
-            - The hiera config file path, if you want to custom every query
-            with multiple hierarchies
+            - The hiera config file path, if you want to custom every query with multiple hierarchies
         required: false
         default: null
 '''
@@ -115,6 +108,11 @@ EXAMPLES = '''
     - debug: msg="{{ line }}"
 '''
 
+RETURN = '''
+This module will return the datatype that you got in Hieradata backend.
+
+'''
+
 
 def main():
     """
@@ -123,8 +121,7 @@ def main():
     values
     - key: Is the key name of the hiera variable
     - fact: Is the key name that must store the hiera output
-    - args: context: must contain all the values that identify the node against
-        hiera
+    - args: context: must contain all the values that identify the node against hiera
     - path: hiera executable
     - source: hiera config file
         WARNING: This module try to solve a disparity between arch of
