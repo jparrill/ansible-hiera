@@ -36,23 +36,19 @@ options:
         description:
             - This is a fact name where you want to save your variable from Hiera.
         required: false
-        default: null
     key:
         description:
             - This is the Hiera variable name that you want to get.
         required: true
-        default: null
         aliases: ['name']
     context:
         description:
             - This key value will set the scope of hiera key/value. Also will follow the hiera's hierarchi, then if you dont have any variable in the first scope will go down to the next one.
         required: false
-        default: null
     source:
         description:
             - The hiera config file path, if you want to custom every query with multiple hierarchies
         required: false
-        default: null
 '''
 
 EXAMPLES = '''

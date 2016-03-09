@@ -12,9 +12,11 @@
         var_array_multi: "proxy::array_multi"
         var_array_line: "proxy::array_line"
         line: "line"
+        hierar: 'hierar'
 
     - debug: msg="{{ item }}"
       with_items: var_array_multi
     - debug: msg="{{ item }}"
       with_items: var_array_line
     - debug: msg="{{ line }}"
+    - debug: msg="{{ hierar }}"
