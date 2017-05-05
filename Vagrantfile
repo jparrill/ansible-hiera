@@ -8,10 +8,6 @@ unless Vagrant.has_plugin?("vagrant-hostmanager")
   raise 'vagrant-hostmanager is not installed!'
 end
 
-unless Vagrant.has_plugin?("vagrant-triggers")
-  raise 'vagrant-triggers is not installed!'
-end
-
 unless defined? ENVIRONMENT
   environment_file = File.join(File.dirname(__FILE__), ENVIRONMENT_FILE)
   ENVIRONMENT = YAML.load(File.open(environment_file, File::RDONLY).read)
@@ -41,13 +37,6 @@ Vagrant.configure(2) do |config|
           end
           vb.customize ['storageattach', :id, '--storagectl', 'SCSI Controller', '--port', details['storage_port'], '--device', 0, '--type', 'hdd', '--medium', "#{name}.vdi"]
         end
-      end
-      node.vm.provision "shell" do |s|
-        s.inline = "bash /vagrant/utils/bootstrap.sh register"
-      end
-      config.trigger.before :destroy do
-        info "Cleaning subscription"
-        run_remote  "bash /vagrant/utils/bootstrap.sh clean"
       end
     end
   end

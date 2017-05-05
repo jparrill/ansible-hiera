@@ -1,7 +1,7 @@
 ---
 - name: Create Facts with Hiera Data
   hosts: nodes
-  sudo: yes
+  become: yes
   tasks:
     - name: Copy Hiera Data into Destination node
       copy: src=/var/lib/hiera/ dest=/var/lib/
@@ -10,7 +10,11 @@
       copy: src=/etc/hiera.yaml dest=/etc/hiera.yaml
 
     - name: Retrieving Hiera Data
-      hiera: path=/bin/hiera key="{{ item.value }}" fact="{{ item.key }}" source=/etc/hiera.yaml
+      hiera:
+        path: /bin/hiera
+        key: "{{ item.value }}"
+        fact: "{{ item.key }}"
+        source: /etc/hiera.yaml
       args:
         context:
           environment: 'production'

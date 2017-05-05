@@ -3,7 +3,7 @@ puppet01.localdomain:
   memory: 1024
   cpus: 1
   address: 192.168.1.50
-  box: RH7.2
+  box: centos/7
 
 # puppet02.localdomain:
 #   memory: 1024
