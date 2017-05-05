@@ -5,7 +5,6 @@ I need a way to centralize all variables that I will use into Puppet and Ansible
 this is a great and simple way to do it.
 
 ### Requirements
-
 - Must be executed into Puppet Master:
   - Because of how Hiera/Puppet/Ansible works, it's necessary to copy
     Hiera Data and Hiera config to destination node to be parsed (instead of
@@ -13,6 +12,7 @@ this is a great and simple way to do it.
     with an remote backend only you will need the Hiera Config).
 - Hiera as a requirement installed into destination nodes.
 - Hiera config File into destination nodes (With the same hierarchi as you need).
+- Hiera Lookup is also a must to be executed on the Puppetmaster/Hiera node to works propertly, because of how Lookups works in ansible _all lookup plugins only are executed on the ansible host, agains for example a module, that could be executed remotely_
 
 #### Capabilities:
 - Use Hiera Data into your Ansible Playbooks/Roles allowing centralization of
