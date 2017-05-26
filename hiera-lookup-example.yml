@@ -1,0 +1,15 @@
+---
+- name: Get Facts from Hiera Data
+  hosts: nodes
+  become: yes
+  connection: local
+  tasks:
+    - name: 'Get Hiera Variables'
+      set_fact:
+        hiera_get_test: "{{ lookup('hiera', 'line environment=production') }}"
+        hiera_get_test1: "{{ lookup('hiera', 'test1') }}"
+
+    - debug: var=item
+      with_items:
+        - "{{ hiera_get_test }}"
+        - "{{ hiera_get_test1 }}"

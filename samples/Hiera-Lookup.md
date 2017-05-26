@@ -1,7 +1,14 @@
+# Hiera Lookup Execution
+This example will try to consume variables in an existant Hiera/Puppetmaster environment.
+
+- hiera-lookup-example.yml:
+
+```
 ---
 - name: Create Facts with Hiera Data
   hosts: nodes
   become: yes
+  connection: local
   tasks:
     - name: 'Get Hiera Variables'
       set_fact:
@@ -12,3 +19,4 @@
       with_items:
         - "{{ hiera_get_test }}"
         - "{{ hiera_get_test1 }}"
+```

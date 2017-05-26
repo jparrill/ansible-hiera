@@ -27,4 +27,5 @@ as we show into the examples.
 
 ### Examples
 - [Stand-Alone node (no Puppetmaster)](samples/Stand-Alone.md)
+- [Hiera Lookup (on a Puppetmaster)](samples/Hiera-Lookup.md)
 - [With Puppetmaster against remote/s node/s](samples/Puppetmaster.md)
